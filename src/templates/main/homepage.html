@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <div class="page-header">
+        <h1>Binary analysis app</h1>
+    </div>
+
+    <form class="form-horizontal" action="" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="control-group">
+            <label class="control-label" for="id_binary">Binary</label>
+            <div class="controls">
+                <input type="file" id="id_binary" name="binary">
+            </div>
+        </div>
+        <div class="control-group">
+            <div class="controls">
+                <input type="submit" class="btn" value="Analyze" />
+            </div>
+        </div>
+    </form>
+
+    {% if analysis_results %}
+        <div class="page-header">
+            <h1>Analysis results</h1>
+        </div>
+
+        {% for header, value in analysis_results %}
+            <h2>{{ header }}</h2>
+            <pre>{{ value }}</pre>
+        {% endfor %}
+    {% endif %}
+    <p>
+        &copy; Copyright by Markus Nussbaum. All rights reserved.
+    </p>
+{% endblock %}
