@@ -1,7 +1,15 @@
 #!/bin/bash
 
 if [ "$1" == "ldd" ]; then
-    ldd $2
+    string=$(file $2)
+    chmod +x $2
+
+    if [[ $string =~ .*static* || $string =~ .*shared* || $string =~ .*symbolic.link* ]]
+    then
+        echo "GTFO with statically linked binaries/shared objects/symlinks."
+    else
+        (LD_TRACE_LOADED_OBJECTS=1 $2) 2>&1
+    fi
 fi
 
 if [ "$1" == "file-header" ]; then
