@@ -1,7 +1,7 @@
 #!/bin/bash
 
 if [ "$1" == "ldd" ]; then
-    string=$(file $2)
+    string=$(file -b $2)
     chmod +x $2
 
     if [[ $string =~ .*static* || $string =~ .*shared* || $string =~ .*symbolic.link* ]]
