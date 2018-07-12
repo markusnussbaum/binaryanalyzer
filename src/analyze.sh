@@ -8,7 +8,7 @@ if [ "$1" == "ldd" ]; then
     then
         echo "GTFO with statically linked binaries/shared objects/symlinks."
     else
-        (LD_TRACE_LOADED_OBJECTS=1 $2) 2>&1
+        LD_TRACE_LOADED_OBJECTS=1 $2
     fi
 fi
 
